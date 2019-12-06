@@ -2,34 +2,42 @@ const os = require("os");
 const path = require("path");
 const fs = require("fs-extra");
 
-export const homedir = os.homedir;
+const utils = {};
 
-export const getRootPath = function() {
-  return path.resolve(__dirname, "../../");
+utils.homedir = os.homedir;
+
+utils.getRootPath = function() {
+  return path.resolve(__dirname, "../");
 };
 
-export const getTaroPath = function() {
-  const taroPath = path.join(exports.homedir(), ".turbo");
+utils.getTurboPath = function() {
+  const taroPath = path.join(utils.homedir(), ".turbo");
   if (!fs.existsSync(taroPath)) {
     fs.ensureDirSync(taroPath);
   }
   return taroPath;
 };
 
-export const getConfig = function() {
-  const configPath = path.join(getTaroPath(), "config.json");
+utils.getConfig = function() {
+  const configPath = path.join(utils.getTurboPath(), "config.json");
   if (fs.existsSync(configPath)) {
     return require(configPath);
   }
   return {};
 };
 
-exports.getPkgVersion = function() {
-  return require(path.join(getRootPath(), "package.json")).version;
+utils.getPkgVersion = function() {
+  return require(path.join(utils.getRootPath(), "package.json")).version;
 };
 
-exports.getPkgItemByKey = function(key) {
-  const packageMap = require(path.join(getRootPath(), "package.json"));
+utils.printPkgVersion = function() {
+  const version = utils.getPkgVersion();
+  console.log(`Turbo v${version}`);
+  console.log();
+};
+
+utils.getPkgItemByKey = function(key) {
+  const packageMap = require(path.join(utils.getRootPath(), "package.json"));
   if (Object.keys(packageMap).indexOf(key) === -1) {
     return {};
   } else {
@@ -37,7 +45,7 @@ exports.getPkgItemByKey = function(key) {
   }
 };
 
-exports.shouldUseYarn = function() {
+utils.shouldUseYarn = function() {
   try {
     execSync("yarn --version", { stdio: "ignore" });
     return true;
@@ -45,3 +53,5 @@ exports.shouldUseYarn = function() {
     return false;
   }
 };
+
+module.exports = utils;

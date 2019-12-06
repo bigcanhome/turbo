@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+const program = require("commander");
+const { printPkgVersion } = require("../util");
+
+printPkgVersion();
+
+program
+  .option("--name [name]", "项目名称")
+  .option("--desc [description]", "项目介绍")
+  .option("--nots", "是否使用TypeScript(默认开启)")
+  .option("--noeslint", "是否使用eslint(默认开启)")
+  .option("--url [templateSource]", "项目模板源")
+  .option("--clone [clone]", "拉取远程模板时使用git clone")
+  .option("--tpl [template]", "项目模板")
+  .option("--css [css]", "CSS预处理器(sass/less/stylus/none)", "less")
+  .parse(process.argv);
+
+const args = program.args;
+const { tpl, url, clone, description, name, css } = program;
+
+const projectOptions = {
+  projectName: args[0] || name
+};

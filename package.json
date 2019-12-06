@@ -2,7 +2,6 @@
   "name": "@turbojs/cli",
   "version": "0.0.1",
   "description": "turbo命令行工具",
-  "main": "index.js",
   "repository": "git@github.com:china-bigcan/turbo-.git",
   "bin": {
     "turbo": "bin/turbo"
@@ -13,11 +12,13 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "commander": "^4.0.1",
-    "eslint": "^6.7.2",
     "fs-extra": "^8.1.0",
     "inquirer": "^7.0.0",
     "lodash": "^4.17.15",
     "ora": "^4.0.3",
     "shelljs": "^0.8.3"
+  },
+  "devDependencies": {
+    "eslint": "^6.7.2"
   }
 }
