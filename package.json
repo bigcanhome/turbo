@@ -16,7 +16,7 @@
     "inquirer": "^7.0.0",
     "lodash": "^4.17.15",
     "ora": "^4.0.3",
-    "shelljs": "^0.8.3"
+    "shelljs": "^0.8.5"
   },
   "devDependencies": {
     "eslint": "^6.7.2"
